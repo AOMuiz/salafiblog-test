@@ -111,22 +111,3 @@ export const getSimilarPosts = async () => {
 
   return result.posts.data
 }
-
-export const getCategories = async () => {
-  const query = gql`
-    query GetPostDetails($slug: String!, $categories: [String!]) {
-      categories {
-        data {
-          attributes {
-            Name
-            Slug
-          }
-        }
-      }
-    }
-  `
-
-  const result = await request(graphqlAPI, query)
-
-  return result.categories.data
-}
