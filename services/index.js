@@ -28,6 +28,7 @@ export const getPosts = async () => {
                 }
               }
             }
+            publishedAt
           }
         }
       }
@@ -35,4 +36,97 @@ export const getPosts = async () => {
   `
   const result = await request(graphqlAPI, query)
   return result.posts.data
+}
+
+export const getCategories = async () => {
+  const query = gql`
+    query GetGategories {
+      categories {
+        data {
+          id
+          attributes {
+            Name
+            Slug
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query)
+
+  return result.categories.data
+}
+
+export const getRecentPosts = async () => {
+  const query = gql`
+    query GetPostDetails {
+      posts(sort: "createdAt:desc", filters: { id: { lt: 3 } }) {
+        data {
+          id
+          attributes {
+            Title
+            Slug
+            Cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query)
+
+  return result.posts.data
+}
+
+export const getSimilarPosts = async () => {
+  const query = gql`
+    query GetPostDetails($slug: String!, $categories: [String!]) {
+      posts(filters: { Slug: { not: $slug } }) {
+        data {
+          id
+          attributes {
+            Title
+            Slug
+            Cover {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query)
+
+  return result.posts.data
+}
+
+export const getCategories = async () => {
+  const query = gql`
+    query GetPostDetails($slug: String!, $categories: [String!]) {
+      categories {
+        data {
+          attributes {
+            Name
+            Slug
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query)
+
+  return result.categories.data
 }

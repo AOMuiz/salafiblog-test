@@ -19,7 +19,50 @@ const PostCard = ({ post }) => {
           {post.attributes.Title}
         </Link>
       </h1>
-      <p className="text-justify">{post.attributes.Content}</p>
+      <div className="mb-8 block items-center justify-center lg:flex">
+        {/* <div className="mb-4 mr-8 flex w-full items-center justify-center lg:mb-0 lg:w-auto">
+          <img
+            alt={post.author.name}
+            width={'30px'}
+            height={'30px'}
+            src={post.author.photo.url}
+            /> 
+       
+          <p className="ml-2 inline align-middle text-lg text-gray-700">
+            {post.author.name}
+          </p>
+        </div> */}
+        <div className="px-0 font-medium text-gray-700 ">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="mr-2 inline h-6 w-6 text-pink-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+          <span className="align-middle">
+            {moment(post.attributes.publishedAt).format('MMM DD, YYYY')}
+          </span>
+        </div>
+      </div>
+
+      <p className="mb-8 px-4 text-justify text-lg font-normal text-gray-700 lg:px-20 ">
+        {post.attributes.Content}
+      </p>
+      <div className="text-center">
+        <Link href={`/post/${post.attributes.slug}`}>
+          <span className="inline-block transform cursor-pointer rounded-full bg-pink-600 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:-translate-y-1 ">
+            Continue Reading
+          </span>
+        </Link>
+      </div>
     </div>
   )
 }

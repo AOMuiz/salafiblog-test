@@ -10,7 +10,7 @@ export default function Home({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="gap 12 grid grid-cols-1 lg:grid-cols-12">
+      <main className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="col-span-1 lg:col-span-8">
           {posts.map((post) => (
             <PostCard post={post} key={post.id} />
