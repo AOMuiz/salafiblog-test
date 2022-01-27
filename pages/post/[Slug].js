@@ -17,6 +17,7 @@ const PostDetails = ({ post }) => {
   const router = useRouter()
 
   console.log('postDetail', post)
+  console.log('S;ug', post[0].attributes.Slug)
 
   if (router.isFallback) {
     return <Loader />
@@ -30,8 +31,8 @@ const PostDetails = ({ post }) => {
             <PostDetail post={post} />
             {/* <Author author={post.author} /> */}
             {/* <AdjacentPosts slug={post.Slug} createdAt={post.createdAt} /> */}
-            <CommentsForm slug={post.Slug} />
-            <Comments slug={post.Slug} />
+            <CommentsForm slug={post[0].attributes.Slug} />
+            <Comments slug={post[0].attributes.Slug} />
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="relative top-8 lg:sticky">
