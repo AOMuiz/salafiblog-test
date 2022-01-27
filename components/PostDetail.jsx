@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
 const PostDetail = ({ post }) => {
-  console.log('singlePost', post[0])
+  //   console.log('singlePost', post[0])
 
   return (
     <>

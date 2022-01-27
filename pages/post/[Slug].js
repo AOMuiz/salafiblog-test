@@ -16,7 +16,7 @@ import { getPosts, getPostDetails } from '../../services'
 const PostDetails = ({ post }) => {
   const router = useRouter()
 
-  console.log('postDeatil', post)
+  console.log('postDetail', post)
 
   if (router.isFallback) {
     return <Loader />
@@ -36,8 +36,10 @@ const PostDetails = ({ post }) => {
           <div className="col-span-1 lg:col-span-4">
             <div className="relative top-8 lg:sticky">
               <PostWidget
-                slug={post.Slug}
-                categories={post.map((category) => category.Slug)}
+                slug={post[0].attributes.Slug}
+                categories={post[0].attributes.categories.data.map(
+                  (category) => category.attributes.Slug
+                )}
               />
               <Categories />
             </div>

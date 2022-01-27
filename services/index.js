@@ -122,15 +122,21 @@ export const getRecentPosts = async () => {
   return result.posts.data
 }
 
-export const getSimilarPosts = async () => {
+export const getSimilarPosts = async (categories, slug) => {
   const query = gql`
-    query GetPostDetails($slug: String!, $categories: [String!]) {
-      posts(filters: { Slug: { not: $slug } }) {
+    query GetPostDetails($categories: [String], $slug: String) {
+      posts(
+        filters: {
+          Slug: { notContains: $slug }
+          and: { categories: { Slug: { in: $categories } } }
+        }
+      ) {
         data {
           id
           attributes {
             Title
             Slug
+            publishedAt
             Cover {
               data {
                 attributes {
@@ -139,7 +145,6 @@ export const getSimilarPosts = async () => {
               }
             }
           }
-          publishedAt
         }
       }
     }
