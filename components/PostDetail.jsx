@@ -2,8 +2,9 @@ import React from 'react'
 import moment from 'moment'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import MarkdownHighlight from './MarkdownHighlight'
 
-const PostDetail = ({ post }) => {
+const PostDetail = ({ post, darkMode }) => {
   //   console.log('singlePost', post[0])
 
   return (
@@ -22,17 +23,18 @@ const PostDetail = ({ post }) => {
           </div>
           <div className="px-4 lg:px-0">
             <div className="mb-8 flex w-full items-center">
-              <div className="mr-8 hidden  items-center justify-center md:flex lg:mb-0 lg:w-auto">
+              <div className="mr-8 hidden items-center justify-center md:flex lg:mb-0 lg:w-auto">
                 {/* <img
                 alt={post.author.name}
                 height="30px"
                 width="30px"
                 className="rounded-full align-middle"
                 src={post.author.photo.url}
-              />
-              <p className="ml-2 inline align-middle text-lg font-medium text-gray-700">
-                {post.author.name}
-              </p> */}
+              /> */}
+                <p className="ml-2 inline align-middle text-lg font-medium text-gray-700">
+                  {/* {post.author.name} */}
+                  By AOMuiz
+                </p>
               </div>
               <div className="font-medium text-gray-700">
                 <svg
@@ -57,10 +59,31 @@ const PostDetail = ({ post }) => {
             <h1 className="mb-8 text-3xl font-semibold">
               {post.attributes.Title}
             </h1>
-            <ReactMarkdown
-              children={post.attributes.Content}
-              remarkPlugins={[remarkGfm]}
-            />
+
+            <div
+              className={darkMode ? 'text-white' : 'text-dark'}
+              className="prose prose-slate mx-auto lg:prose-xl"
+            >
+              <ReactMarkdown
+                children={post.attributes.Content}
+                remarkPlugins={[remarkGfm]}
+              />
+              {/* <ReactMarkdown
+                children={post.attributes.Content}
+                renderers={{
+                  code: ({ language, value }) => {
+                 
+                    return (
+                      <MarkdownHighlight
+                        language={language}
+                        value={value}
+                        darkMode={darkMode}
+                      />
+                    )
+                  },
+                }} 
+              />*/}
+            </div>
           </div>
         </div>
       ))}

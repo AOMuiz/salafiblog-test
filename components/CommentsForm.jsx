@@ -16,7 +16,7 @@ const CommentsForm = ({ slug }) => {
     const { value: comment } = commentEl.current
     const { value: name } = nameEl.current
     const { value: email } = emailEl.current
-    const { value: storeData } = storeDataEl.current
+    const { checked: storeData } = storeDataEl.current
 
     if (!comment || !email || !name) {
       setError(true)
@@ -24,6 +24,14 @@ const CommentsForm = ({ slug }) => {
     }
 
     const commentObj = { name, email, comment, slug }
+
+    if (storeData) {
+      window.localStorage.setItem('name', name)
+      window.localStorage.setItem('email', email)
+    } else {
+      window.localStorage.removeItem('name', name)
+      window.localStorage.removeItem('email', email)
+    }
   }
 
   return (
@@ -62,7 +70,7 @@ const CommentsForm = ({ slug }) => {
             ref={storeDataEl}
             name="storeData"
             id="storeData"
-            checked="true"
+            defaultChecked="true"
           />
           <label
             htmlFor="storeData"

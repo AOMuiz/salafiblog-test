@@ -154,3 +154,42 @@ export const getSimilarPosts = async (categories, slug) => {
 
   return result.posts.data
 }
+
+export const submitComment = async (obj) => {
+  const result = await fetch('api/comments', {
+    method: 'POST',
+    headers: {
+      'Conten-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  })
+
+  return result.json()
+}
+
+export const getComments = async (id) => {
+  const query = gql`
+    query GetComments($id: ID) {
+      post(id: $id) {
+        data {
+          id
+          attributes {
+            comments {
+              data {
+                attributes {
+                  Comment
+                  Name
+                  createdAt
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query, { id })
+
+  return result.post.data
+}

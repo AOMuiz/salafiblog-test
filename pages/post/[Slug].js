@@ -16,8 +16,8 @@ import { getPosts, getPostDetails } from '../../services'
 const PostDetails = ({ post }) => {
   const router = useRouter()
 
-  console.log('postDetail', post)
-  console.log('S;ug', post[0].attributes.Slug)
+  // console.log('postDetail', post)
+  // console.log('Slug', post[0].attributes.Slug)
 
   if (router.isFallback) {
     return <Loader />
@@ -25,14 +25,14 @@ const PostDetails = ({ post }) => {
 
   return (
     <>
-      <div className="container mx-auto mb-8 px-10">
+      <div className="container mx-auto mb-8 px-5 lg:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="col-span-1 lg:col-span-8">
             <PostDetail post={post} />
             {/* <Author author={post.author} /> */}
             {/* <AdjacentPosts slug={post.Slug} createdAt={post.createdAt} /> */}
             <CommentsForm slug={post[0].attributes.Slug} />
-            <Comments slug={post[0].attributes.Slug} />
+            {/* <Comments slug={post[0].attributes.Slug} /> */}
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="relative top-8 lg:sticky">
@@ -59,6 +59,7 @@ export async function getStaticProps({ params }) {
     props: {
       post: data,
     },
+    revalidate: 4,
   }
 }
 
@@ -69,6 +70,6 @@ export async function getStaticPaths() {
   // console.log('staticprops', posts)
   return {
     paths: posts.map(({ attributes: { Slug } }) => ({ params: { Slug } })),
-    fallback: true,
+    fallback: false,
   }
 }
