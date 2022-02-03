@@ -6,8 +6,8 @@ const PostCard = ({ post }) => {
   // console.log(post)
 
   return (
-    <div className="relative mb-8 overflow-hidden rounded-lg bg-white p-3 pb-12 shadow-lg lg:p-8 ">
-      <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+    <div className="relative mb-8 overflow-hidden rounded-lg bg-white  p-3 pb-12 shadow-lg lg:p-8 ">
+      <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">
           {moment(post.attributes.publishedAt).format('MMM DD, YYYY')}
@@ -23,9 +23,9 @@ const PostCard = ({ post }) => {
             {post.attributes.Title}
           </a>
         </Link>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">
+        {/* <p className="mt-2 text-gray-600 dark:text-gray-300">
           {post.attributes.Content}
-        </p>
+        </p> */}
       </div>
       {/* <dl class="mt-6 flex">
         <div class="flex flex-col-reverse">

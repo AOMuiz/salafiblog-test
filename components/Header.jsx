@@ -14,9 +14,9 @@ const Header = () => {
   return (
     <div className="container mx-auto mb-8 px-5 lg:px-10">
       <div className="inline-block w-full border-b border-blue-400 py-8">
-        <div className="block md:float-left">
+        <div className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text md:float-left">
           <Link href="/">
-            <span className="cursor-pointer text-3xl font-bold text-white lg:text-4xl">
+            <span className="cursor-pointer text-3xl font-bold text-transparent text-white lg:text-4xl">
               SalafiBlog
             </span>
           </Link>
