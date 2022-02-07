@@ -11,13 +11,14 @@ import {
   Loader,
 } from '../../components'
 import { getPosts, getPostDetails } from '../../services'
+import markdownToHtml from '../../lib/markdown'
 // import { AdjacentPosts } from '../../sections'
 
 const PostDetails = ({ post }) => {
   const router = useRouter()
 
-  // console.log('postDetail', post)
-  // console.log('Slug', post[0].attributes.Slug)
+  console.log('postDetail', post)
+  // console.log('Slug', post[0].attributes.Content)
 
   if (router.isFallback) {
     return <Loader />
@@ -31,14 +32,14 @@ const PostDetails = ({ post }) => {
             <PostDetail post={post} />
             {/* <Author author={post.author} /> */}
             {/* <AdjacentPosts slug={post.Slug} createdAt={post.createdAt} /> */}
-            <CommentsForm slug={post[0].attributes.Slug} />
+            <CommentsForm slug={post.Slug} />
             {/* <Comments slug={post[0].attributes.Slug} /> */}
           </div>
           <div className="col-span-1 lg:col-span-4">
             <div className="relative top-8 lg:sticky">
               <PostWidget
-                slug={post[0].attributes.Slug}
-                categories={post[0].attributes.categories.data.map(
+                slug={post.Slug}
+                categories={post.categories.data.map(
                   (category) => category.attributes.Slug
                 )}
               />
@@ -55,9 +56,13 @@ export default PostDetails
 // Fetch data at build time
 export async function getStaticProps({ params }) {
   const data = await getPostDetails(params.Slug)
+  console.log('data', data)
+  const content = await markdownToHtml(data[0]?.attributes.Content || '')
+  console.log('content', content)
+
   return {
     props: {
-      post: data,
+      post: { ...data[0].attributes, Content: content },
     },
   }
 }
